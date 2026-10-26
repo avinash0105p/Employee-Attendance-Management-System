@@ -1,19 +1,41 @@
-
-# Phase 2 - Employee Attendance Management System
-
-## Overview
-Phase 2 extends the existing Phase 1 Employee Attendance Management System using Python, FastAPI, MySQL, and SQLAlchemy.
-
-## Features
-- Role Management (Admin, Manager, Employee)
-- User Registration
-- Manager Creation
-- Employee-User Mapping
-- Leave Approval Workflow
+# Employee Attendance Management System
 
 ## Technologies
 - Python
 - FastAPI
 - MySQL
 - SQLAlchemy
-- JWT authentication will be implemented in Phase 3.
+- Pydantic
+
+## Features
+
+### Phase 1
+- Employee CRUD APIs
+- Attendance CRUD APIs
+- Leave CRUD APIs
+
+### Phase 2
+- Roles: Admin, Manager, Employee
+- Shared Users table
+- Employee registration
+- Admin creates Manager
+- Password hashing (PBKDF2 SHA-256)
+- Manager leave approval workflow
+- Employee leave history
+- Leave review timestamps
+
+## Setup Steps
+
+1. Install requirements:
+   pip install -r requirements.txt
+
+2. Run `migrate_phase2.sql` in MySQL to update tables without losing Phase 1 data.
+
+3. Create the initial Admin account:
+   python seed_admin.py
+
+4. Start the FastAPI server:
+   uvicorn main:app --reload
+
+5. Open Swagger docs:
+   http://127.0.0.1:8000/docs

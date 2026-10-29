@@ -1,120 +1,80 @@
-# Phase 3 – Employee Attendance Management System
+# Employee Attendance Management System - Phase 3
 
-## Project Overview
-
-Phase 3 enhances the Employee Attendance Management System developed in Phase 1 and Phase 2 using Python, FastAPI, MySQL, SQLAlchemy, HTML, CSS, and JavaScript.
-
-This phase introduces JWT authentication, refresh tokens, role-based access control, and frontend dashboards for Admin, Manager, and Employee users.
-
-## Technologies Used
+## Technologies
 
 - Python
 - FastAPI
 - MySQL
 - SQLAlchemy
 - JWT Authentication
-- PyJWT
-- HTML
-- CSS
-- JavaScript
+- HTML, CSS, JavaScript
 
 ## Features
 
 ### Authentication
-- Login using email and password
-- JWT access token generation
-- Refresh token functionality
-- Logout and session revocation
-- Get current logged-in user details
-- Validate authentication tokens
+- Login
+- Logout
+- JWT access token
+- Refresh token
+- Current user details
+- Token revocation
 
 ### Admin
-- View Admin accounts
-- Create and view Managers
-- Register and manage Employees
-- Manage attendance records
-- View and manage leave requests
+- Create Manager
+- Register Employee
+- View and manage Employees
+- Manage Attendance
+- View Leave Requests
 
 ### Manager
 - View assigned Employees
-- View pending leave requests
-- Approve or reject leave requests
+- View pending Leave Requests
+- Approve or Reject Leaves
 
 ### Employee
-- View personal profile
-- View attendance records
-- Apply for leave
-- View leave request status
+- View Profile
+- View Attendance
+- Apply for Leave
+- View Leave Status
 
-### Frontend
-- Login page
-- Admin dashboard
-- Manager dashboard
-- Employee dashboard
-- API integration using JavaScript Fetch
-- Logout functionality
+## Setup
 
-## Project Setup
+1. Install Python and MySQL.
+2. Open the existing project folder.
+3. Install dependencies:
 
-### 1. Install Dependencies
+   pip install -r requirements.txt
 
-```bash
-pip install -r requirements.txt
-```
+4. Configure database and JWT secrets in `.env`.
+5. Run `migrate_phase3.sql` in MySQL Workbench.
+6. Make sure Phase 2 roles and tables exist.
+7. If an Admin account does not exist, run:
 
-### 2. Configure Environment Variables
+   python seed_admin.py
 
-Create a `.env` file in the project root and configure the MySQL connection and JWT settings.
+8. Start the server from the project root:
 
-```env
-DATABASE_URL=mysql+pymysql://root:YOUR_PASSWORD@localhost:3306/employee_attendance_db
-JWT_SECRET_KEY=REPLACE_WITH_A_RANDOM_SECRET_AT_LEAST_32_CHARACTERS
-ACCESS_TOKEN_EXPIRE_MINUTES=15
-REFRESH_TOKEN_EXPIRE_DAYS=7
-```
+   uvicorn main:app --reload
 
-Replace the placeholders with your local configuration. Do not upload the actual `.env` file or secrets to GitHub.
+9. Open Swagger:
 
-### 3. Database Setup
+   http://127.0.0.1:8000/docs
 
-- Create the `employee_attendance_db` database in MySQL.
-- Apply the Phase 2 migration if it has not already been applied.
-- Execute `migrate_phase3.sql` to create the Phase 3 token session table.
+10. Open the frontend:
 
-### 4. Initialize Admin
+    http://127.0.0.1:8000/
 
-If an Admin account does not already exist, run:
+## Testing
 
-```bash
-python seed_admin.py
-```
+1. Login using the Admin account.
+2. Copy the access token from the login response.
+3. Click Authorize in Swagger and enter:
 
-### 5. Run the Application
+   Bearer YOUR_ACCESS_TOKEN
 
-```bash
-uvicorn main:app --reload
-```
-
-## Application URLs
-
-- Frontend: http://127.0.0.1:8000/
-- Swagger UI: http://127.0.0.1:8000/docs
-
-## Authentication Workflow
-
-1. Log in using registered credentials.
-2. Receive an access token and refresh token.
-3. Use the access token to access protected APIs.
-4. Use the refresh token to obtain a new token pair.
-5. Log out to revoke the active session.
-
-## Security
-
-- Passwords are stored as hashes.
-- Protected APIs require authentication and appropriate roles.
-- Keep database credentials, JWT secrets, and tokens private.
-- Do not commit `.env` or virtual environment folders.
-
-## Project Status
-
-Phase 3 builds on the existing Employee Attendance Management System by adding authentication, authorization, token refresh, and frontend integration.
+4. Test protected endpoints.
+5. Test refresh using `/auth/refresh`.
+6. Test logout using `/auth/logout`.
+7. Verify that the old access token fails after logout.
+8. Verify that Manager and Employee accounts cannot access
+   unauthorized records.

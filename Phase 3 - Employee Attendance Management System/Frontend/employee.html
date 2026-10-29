@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header class="topbar">
+        <h1>Employee Dashboard</h1>
+        <button onclick="logout()">Logout</button>
+    </header>
+
+    <main class="container">
+        <section class="panel">
+            <h2>My Profile</h2>
+            <div id="profile"></div>
+        </section>
+
+        <section class="panel">
+            <h2>My Attendance</h2>
+            <button onclick="loadMyAttendance()">Refresh Attendance</button>
+            <div id="attendance"></div>
+        </section>
+
+        <section class="panel">
+            <h2>Apply for Leave</h2>
+
+            <form id="leaveForm">
+                <label for="from_date">From Date</label>
+                <input id="from_date" type="date" required>
+
+                <label for="to_date">To Date</label>
+                <input id="to_date" type="date" required>
+
+                <label for="leave_type">Leave Type</label>
+                <input id="leave_type" required maxlength="50">
+
+                <label for="reason">Reason</label>
+                <textarea id="reason" required maxlength="500"></textarea>
+
+                <button type="submit">Apply Leave</button>
+            </form>
+
+            <p id="message" class="message"></p>
+        </section>
+
+        <section class="panel">
+            <h2>My Leave Status</h2>
+            <button onclick="loadMyLeaves()">Refresh Leave Status</button>
+            <div id="leaves"></div>
+        </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+    <script>
+        requireDashboard("Employee");
+        loadMyProfile();
+        loadMyAttendance();
+        loadMyLeaves();
+    </script>
+</body>
+</html>

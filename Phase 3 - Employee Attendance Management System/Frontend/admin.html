@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header class="topbar">
+        <h1>Admin Dashboard</h1>
+        <button onclick="logout()">Logout</button>
+    </header>
+
+    <main class="container">
+        <section class="panel">
+            <h2>Create Manager</h2>
+
+            <form id="managerForm">
+                <label for="full_name">Full Name</label>
+                <input id="full_name" required minlength="3">
+
+                <label for="manager_email">Email</label>
+                <input id="manager_email" type="email" required>
+
+                <label for="phone">Phone</label>
+                <input id="phone" required minlength="10" maxlength="15">
+
+                <label for="manager_password">Password</label>
+                <input id="manager_password" type="password"
+                       required minlength="8">
+
+                <button type="submit">Create Manager</button>
+            </form>
+
+            <p id="message" class="message"></p>
+        </section>
+
+        <section class="panel">
+            <h2>Employee Details</h2>
+            <button onclick="loadEmployees()">Refresh Employees</button>
+            <div id="employees"></div>
+        </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+    <script>
+        requireDashboard("Admin");
+        loadEmployees();
+    </script>
+</body>
+</html>

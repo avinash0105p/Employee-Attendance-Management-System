@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header class="topbar">
+        <h1>Manager Dashboard</h1>
+        <button onclick="logout()">Logout</button>
+    </header>
+
+    <main class="container">
+        <section class="panel">
+            <h2>Assigned Employees</h2>
+            <button onclick="loadManagerEmployees()">Refresh Employees</button>
+            <div id="employees"></div>
+        </section>
+
+        <section class="panel">
+            <h2>Pending Leave Requests</h2>
+            <button onclick="loadPendingLeaves()">Refresh Leave Requests</button>
+            <div id="leaves"></div>
+        </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+    <script>
+        requireDashboard("Manager");
+        loadManagerEmployees();
+        loadPendingLeaves();
+    </script>
+</body>
+</html>
